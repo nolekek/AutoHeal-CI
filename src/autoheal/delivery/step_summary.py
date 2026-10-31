@@ -26,11 +26,13 @@ class StepSummaryGenerator:
         usage: Optional[Dict[str, Any]] = None,
         patch_path: Optional[str] = None,
         model: Optional[str] = None,
+        license_info: Optional[Any] = None,
     ):
         self.state: Dict[str, Any] = dict(state) if state else {}
         self.usage: Dict[str, Any] = usage or {}
         self.patch_path: Optional[str] = patch_path
         self.model: str = model or self.state.get("model") or "gpt-4o"
+        self.license_info = license_info
 
     def generate_mermaid_diagram(self) -> str:
         """
@@ -177,6 +179,11 @@ AutoHeal-CI could not arrive at a verified patch within {max_rounds} deliberatio
 Manual developer inspection is recommended.
 """
 
+        badge_str = ""
+        if self.license_info:
+            from ..licensing import LicenseManager
+            badge_str = f"\n* {LicenseManager.format_badge(self.license_info)}"
+
         # Build sections
         sections = [
             status_header,
@@ -187,7 +194,7 @@ Manual developer inspection is recommended.
             f"* **Exception:** `{exc_type}: {exc_msg}`",
             f"* **Coder Hypothesis:** {hypothesis}",
             f"* **Deliberation Deliberations:** `{rounds}` of `{max_rounds}` rounds completed",
-            f"* **Regression Shield:** {'✅ 100% Repo Tests Passed' if self.state.get('regression_suite_passed') else '❌ Incomplete'}",
+            f"* **Regression Shield:** {'✅ 100% Repo Tests Passed' if self.state.get('regression_suite_passed') else '❌ Incomplete'}{badge_str}",
             "---",
             "### 🔄 Adversarial Deliberation Workflow",
             self.generate_mermaid_diagram(),

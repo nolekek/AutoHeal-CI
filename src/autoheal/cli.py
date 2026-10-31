@@ -13,6 +13,8 @@ from .agents.graph import AutoHealOrchestrator
 from .agents.state import AutoHealState
 from .delivery.step_summary import StepSummaryGenerator
 from .delivery.patch_artifact import PatchArtifactExporter
+from .delivery.webhook_notifier import WebhookNotifier
+from .licensing import LicenseManager
 
 def print_banner():
     banner = r"""
@@ -76,6 +78,8 @@ def main():
     args = parser.parse_args()
 
     config = AutoHealConfig(repo_path=os.path.abspath(args.repo_path))
+    license_info = LicenseManager.validate_key(config.license_key)
+    print(f"💎 {LicenseManager.format_badge(license_info)}")
 
     # 1. Obtain test failure log
     if args.log_file and os.path.exists(args.log_file):
@@ -210,9 +214,22 @@ def main():
             state=final_state,
             usage=usage,
             patch_path=patch_path,
-            model=config.model
+            model=config.model,
+            license_info=license_info
         )
         summary_gen.write_to_github_summary()
+
+        if config.webhook_url:
+            WebhookNotifier(config.webhook_url).send_notification(
+                fixed=True,
+                pr_url=final_state.get("pr_url"),
+                patch_path=patch_path,
+                cost_usd=usage.get("total_cost_usd", 0.0),
+                rounds=final_state.get("round_count", 1),
+                repo=os.getenv("GITHUB_REPOSITORY", os.path.basename(config.repo_path)),
+                branch=os.getenv("GITHUB_REF_NAME", "main"),
+                failure_mode=final_state.get("failure_mode")
+            )
 
         set_github_output("fixed", "true")
         set_github_output("pr_url", final_state.get("pr_url") or "")
@@ -225,9 +242,22 @@ def main():
             state=final_state,
             usage=usage,
             patch_path=patch_path,
-            model=config.model
+            model=config.model,
+            license_info=license_info
         )
         summary_gen.write_to_github_summary()
+
+        if config.webhook_url:
+            WebhookNotifier(config.webhook_url).send_notification(
+                fixed=False,
+                pr_url=None,
+                patch_path=patch_path,
+                cost_usd=usage.get("total_cost_usd", 0.0),
+                rounds=final_state.get("round_count", 1),
+                repo=os.getenv("GITHUB_REPOSITORY", os.path.basename(config.repo_path)),
+                branch=os.getenv("GITHUB_REF_NAME", "main"),
+                failure_mode=final_state.get("failure_mode")
+            )
 
         set_github_output("fixed", "false")
         set_github_output("pr_url", "")

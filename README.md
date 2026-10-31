@@ -9,7 +9,9 @@
 [![AST Engine](https://img.shields.io/badge/AST%20Parser-Tree--sitter-blue.svg)](#1-ast--symbolic-call-graph-slicing-tree-sitter)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-1--Click%20Workflow-purple.svg)](#-live-cloud-demo-в-1-клик)
 [![Platform](https://img.shields.io/badge/Platform-GitHub%20Actions%20Runner-black.svg)](#-быстрый-старт-в-github-actions)
-[![License](https://img.shields.io/badge/License-Apache--2.0-blueviolet.svg)](#-лицензия)
+[![Pricing](https://img.shields.io/badge/Plans-Free%20%7C%20Pro%20%7C%20Enterprise-success.svg)](PRICING.md)
+[![Sponsor](https://img.shields.io/badge/Sponsor-Polar.sh%20%7C%20GitHub-ff69b4.svg)](.github/FUNDING.yml)
+[![License](https://img.shields.io/badge/License-Apache--2.0%20%7C%20Commercial-blueviolet.svg)](COMMERCIAL.md)
 
 ---
 
@@ -316,6 +318,22 @@ AutoHeal-CI/
 
 ---
 
+## 💎 Тарифы и Коммерческая поддержка (Pricing & Plans)
+
+AutoHeal-CI доступен в трех вариантах использования:
+
+| План | Стоимость | Описание и возможности |
+| :--- | :--- | :--- |
+| **🆓 Community** | **\$0 (Free Forever)** | Open-Source ядро, BYOK (свои ключи OpenAI/Claude/Gemini), неограниченные запуски, AST-слайсинг и песочница. |
+| **⚡ Pro** | **\$39 / мес** | Готовый высокоскоростной LLM-прокси без ввода ключей, мгновенные алерты в **Slack / MS Teams**, приоритетная поддержка. |
+| **🏢 Enterprise** | **\$499 / мес** | Развертывание в изолированном контуре (On-Prem / VPC), поддержка локальных LLM (Ollama, vLLM), адаптеры для GitLab CI / Bitbucket, SLA 99.9%. |
+
+👉 Полное сравнение тарифов и калькулятор окупаемости: [**PRICING.md**](PRICING.md)  
+👉 Условия коммерческого лицензирования и SLA: [**COMMERCIAL.md**](COMMERCIAL.md)  
+👉 Интерактивный лендинг с ROI-калькулятором: [**marketing/index.html**](marketing/index.html)
+
+---
+
 ## 📄 Лицензия
 
-Распространяется под лицензией **Apache-2.0**.
+Распространяется по модели **Dual-Licensing** (Apache-2.0 для открытых проектов / Commercial License для Enterprise). Подробнее в [COMMERCIAL.md](COMMERCIAL.md).

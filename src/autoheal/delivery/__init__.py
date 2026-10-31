@@ -3,10 +3,12 @@
 from .github_pr import GitHubPRDelivery
 from .step_summary import StepSummaryGenerator, write_step_summary
 from .patch_artifact import PatchArtifactExporter
+from .webhook_notifier import WebhookNotifier
 
 __all__ = [
     "GitHubPRDelivery",
     "StepSummaryGenerator",
     "write_step_summary",
     "PatchArtifactExporter",
+    "WebhookNotifier",
 ]

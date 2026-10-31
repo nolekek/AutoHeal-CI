@@ -27,6 +27,12 @@ class AutoHealConfig(BaseModel):
     create_pr: bool = Field(
         default_factory=lambda: os.getenv("AUTOHEAL_CREATE_PR", "true").lower() in ("true", "1", "yes")
     )
+    webhook_url: Optional[str] = Field(
+        default_factory=lambda: os.getenv("AUTOHEAL_WEBHOOK_URL") or os.getenv("SLACK_WEBHOOK_URL")
+    )
+    license_key: Optional[str] = Field(
+        default_factory=lambda: os.getenv("AUTOHEAL_LICENSE_KEY")
+    )
     repo_path: str = Field(
         default_factory=lambda: os.getenv("GITHUB_WORKSPACE", os.getcwd())
     )

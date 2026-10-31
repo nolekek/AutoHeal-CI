@@ -37,6 +37,14 @@ inputs:
     description: 'Optional hard budget cap in USD for LLM token usage'
     required: false
     default: ''
+  webhook_url:
+    description: 'Optional Slack, Discord, or Microsoft Teams webhook URL for instant team alerts'
+    required: false
+    default: ''
+  license_key:
+    description: 'Optional AutoHeal-CI Pro / Enterprise license key'
+    required: false
+    default: ''
 
 outputs:
   fixed:
@@ -67,5 +75,7 @@ runs:
         AUTOHEAL_MAX_ROUNDS: ${{ inputs.max_rounds }}
         AUTOHEAL_CREATE_PR: ${{ inputs.create_pr }}
         AUTOHEAL_MAX_BUDGET_USD: ${{ inputs.max_budget_usd }}
+        AUTOHEAL_WEBHOOK_URL: ${{ inputs.webhook_url }}
+        AUTOHEAL_LICENSE_KEY: ${{ inputs.license_key }}
       run: |
         python -m autoheal.cli

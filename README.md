@@ -2,7 +2,7 @@
 
 > **Autonomous Multi-Agent CI/CD Self-Healing Bot with AST-Aware Slicing, Isolated Sandbox Verification & Regression Shielding.**
 
-[![Test Suite](https://img.shields.io/badge/Tests-97%20Passed%20(100%25)-brightgreen.svg)](#-тестирование-и-верификация)
+[![Test Suite](https://img.shields.io/badge/Tests-105%20Passed%20(100%25)-brightgreen.svg)](#-тестирование-и-верификация)
 [![Supported Languages](https://img.shields.io/badge/Languages-Python%20%7C%20TypeScript%20%7C%20JavaScript-blue.svg)](#-мультиязычность-и-тест-раннеры)
 [![Test Runners](https://img.shields.io/badge/Runners-pytest%20%7C%20Jest%20%7C%20Vitest-orange.svg)](#-быстрый-старт-в-github-actions)
 [![Benchmark Suite](https://img.shields.io/badge/SWE--Bench%20Mini-100%25%20Verified%20(9%2F9)-brightgreen.svg)](#-мини-бенчмарк-swe-bench-mini)
@@ -43,7 +43,7 @@
    └─ Round 2: Red-Team Critic votes APPROVED.
 
 🛡️ [4/4] Verification & Delivery...
-   ├─ Regression Shield: 100% Green (97/97 tests pass in sandbox)
+   ├─ Regression Shield: 100% Green (105/105 tests pass in sandbox)
    ├─ Fallback Artifact: Exported to .autoheal/autoheal-fix.patch
    └─ GitHub Pull Request: Opened #42 (autoheal/fix-compute-average)
 
@@ -256,7 +256,7 @@ pytest -q
 ```text
 ........................................................................ [ 74%]
 .........................                                                [100%]
-====================== 97 passed in 31.39s ======================
+====================== 105 passed in 30.27s ======================
 ```
 
 * `tests/test_ast_slicer.py` — синтаксические срезы Python функций, методов и декораторов.
@@ -313,7 +313,7 @@ AutoHeal-CI/
 │           ├── scenarios.py           # 6 дефектов реального мира (Python)
 │           ├── ts_scenarios.py        # 3 дефекта реального мира (TypeScript)
 │           └── runner.py              # Автономный Runner бенчмарка
-└── tests/                             # 97 юнит-, интеграционных и сквозных тестов
+└── tests/                             # 105 юнит-, интеграционных и сквозных тестов
 ```
 
 ---

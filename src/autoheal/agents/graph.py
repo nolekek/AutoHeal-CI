@@ -1,5 +1,6 @@
+from __future__ import annotations
 import os
-from typing import Dict, Any, Literal
+from typing import Dict, Any, Literal, Optional
 from langgraph.graph import StateGraph, START, END
 
 from .state import AutoHealState

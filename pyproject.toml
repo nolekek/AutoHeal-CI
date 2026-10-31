@@ -39,5 +39,6 @@ python_files = ["test_*.py"]
 filterwarnings = [
     "ignore:'asyncio.iscoroutinefunction' is deprecated:DeprecationWarning",
     "ignore::DeprecationWarning:langsmith.*",
-    "ignore::DeprecationWarning:urllib3.*"
+    "ignore::DeprecationWarning:urllib3.*",
+    "ignore::pytest.PytestDeprecationWarning:pytest_asyncio.*"
 ]

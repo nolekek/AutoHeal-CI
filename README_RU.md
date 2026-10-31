@@ -333,8 +333,9 @@ AutoHeal-CI доступен в трех вариантах использова
 | **🏢 Enterprise** | **\$499 / мес** | Развертывание в изолированном контуре (On-Prem / VPC), поддержка локальных LLM (Ollama, vLLM), адаптеры для GitLab CI / Bitbucket, SLA 99.9%. |
 
 👉 Полное сравнение тарифов и калькулятор окупаемости: [**PRICING.md**](PRICING.md)  
+👉 Мгновенная покупка лицензии Pro (карты РФ и мира): [**Оформить на Lava.top**](https://app.lava.top/products/03e25483-654d-4e28-8231-2a5e5cc8b62a)  
 👉 Условия коммерческого лицензирования и SLA: [**COMMERCIAL.md**](COMMERCIAL.md)  
-👉 Интерактивный лендинг с ROI-калькулятором: [**marketing/index.html**](marketing/index.html)
+👉 Интерактивный лендинг с ROI-калькулятором: [**nolekek.github.io/AutoHeal-CI**](https://nolekek.github.io/AutoHeal-CI/)
 
 ---
 

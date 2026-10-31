@@ -321,6 +321,7 @@ AutoHeal-CI is available under three plans:
 | **🏢 Enterprise** | **\$499 / month** | Air-gapped on-premise VPC deployment, local LLMs (Ollama, vLLM), GitLab CI & Bitbucket adapters, 99.9% SLA. |
 
 👉 Full plan comparison & ROI calculator: [**PRICING.md**](PRICING.md)  
+👉 Instant Pro license checkout (Cards & Worldwide): [**Buy Pro on Lava.top**](https://app.lava.top/products/03e25483-654d-4e28-8231-2a5e5cc8b62a)  
 👉 Commercial licensing & B2B contracts: [**COMMERCIAL.md**](COMMERCIAL.md)  
 👉 Interactive landing page with live ROI calculator: [**nolekek.github.io/AutoHeal-CI**](https://nolekek.github.io/AutoHeal-CI/)
 

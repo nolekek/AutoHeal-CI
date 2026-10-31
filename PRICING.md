@@ -41,8 +41,8 @@
 
 We support multiple flexible checkout methods for international and local teams:
 
-1. **💳 International Cards (Visa / Mastercard)**: Via our [Lava.top](https://lava.top) / [Boosty](https://boosty.to) storefront.
-2. **🪙 Cryptocurrency (USDT TRC20 / BEP20 / TON / BTC)**: Instant automated key generation with zero payment processor friction.
+1. **💳 Bank Cards (Visa / Mastercard / MIR worldwide)**: Instant checkout via [Lava.top AutoHeal-CI Storefront](https://app.lava.top/products/03e25483-654d-4e28-8231-2a5e5cc8b62a) (instant digital license key download).
+2. **🪙 Cryptocurrency (USDT TRC20 / BEP20 / TON / BTC)**: Instant key delivery with zero payment processor friction via [Telegram @nolekek](https://t.me/nolekek).
 3. **🏢 Corporate Invoicing (B2B Wire / Безналичный расчет)**: Available for companies and startups (ООО / ИП / International wire) with official service contracts, invoices, and accounting closing documents.
 
 After payment, you will receive your `AUTOHEAL_LICENSE_KEY`. Add the secret to your GitHub Repository Settings (`Settings -> Secrets and variables -> Actions`):

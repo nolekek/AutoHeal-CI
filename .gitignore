@@ -39,3 +39,7 @@ ENV/
 
 # AutoHeal ephemeral sandbox
 .autoheal-sandbox/
+
+# Commercial fulfillment keys
+*License_Key*.txt
+*.key

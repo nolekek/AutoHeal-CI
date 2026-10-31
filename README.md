@@ -2,13 +2,18 @@
 
 > **Autonomous Multi-Agent CI/CD Self-Healing Bot with AST-Aware Slicing, Isolated Sandbox Verification & Regression Shielding.**
 
-[![Test Suite](https://img.shields.io/badge/Tests-105%20Passed%20(100%25)-brightgreen.svg)](#-тестирование-и-верификация)
-[![Supported Languages](https://img.shields.io/badge/Languages-Python%20%7C%20TypeScript%20%7C%20JavaScript-blue.svg)](#-мультиязычность-и-тест-раннеры)
-[![Test Runners](https://img.shields.io/badge/Runners-pytest%20%7C%20Jest%20%7C%20Vitest-orange.svg)](#-быстрый-старт-в-github-actions)
-[![Benchmark Suite](https://img.shields.io/badge/SWE--Bench%20Mini-100%25%20Verified%20(9%2F9)-brightgreen.svg)](#-мини-бенчмарк-swe-bench-mini)
+<p align="left">
+  <strong>English</strong> | <a href="README_RU.md">Русский</a>
+</p>
+
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-AutoHeal--CI-blue.svg?logo=github)](https://github.com/marketplace/actions/autoheal-ci)
+[![Test Suite](https://img.shields.io/badge/Tests-105%20Passed%20(100%25)-brightgreen.svg)](#-testing-and-verification)
+[![Supported Languages](https://img.shields.io/badge/Languages-Python%20%7C%20TypeScript%20%7C%20JavaScript-blue.svg)](#-multi-language--test-runners)
+[![Test Runners](https://img.shields.io/badge/Runners-pytest%20%7C%20Jest%20%7C%20Vitest-orange.svg)](#-quickstart-in-github-actions)
+[![Benchmark Suite](https://img.shields.io/badge/SWE--Bench%20Mini-100%25%20Verified%20(9%2F9)-brightgreen.svg)](#-swe-bench-mini-benchmark)
 [![AST Engine](https://img.shields.io/badge/AST%20Parser-Tree--sitter-blue.svg)](#1-ast--symbolic-call-graph-slicing-tree-sitter)
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-1--Click%20Workflow-purple.svg)](#-live-cloud-demo-в-1-клик)
-[![Platform](https://img.shields.io/badge/Platform-GitHub%20Actions%20Runner-black.svg)](#-быстрый-старт-в-github-actions)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-1--Click%20Workflow-purple.svg)](#-1-click-live-cloud-demo)
+[![Platform](https://img.shields.io/badge/Platform-GitHub%20Actions%20Runner-black.svg)](#-quickstart-in-github-actions)
 [![Pricing](https://img.shields.io/badge/Plans-Free%20%7C%20Pro%20%7C%20Enterprise-success.svg)](PRICING.md)
 [![Sponsor](https://img.shields.io/badge/Sponsor-GitHub%20%7C%20Boosty-ff69b4.svg)](.github/FUNDING.yml)
 [![License](https://img.shields.io/badge/License-Apache--2.0%20%7C%20Commercial-blueviolet.svg)](COMMERCIAL.md)
@@ -52,62 +57,62 @@
 
 ---
 
-## 📌 О проекте
+## 📌 About the Project
 
-В современных IT-командах до 35% времени инженеров уходит на рутинный разбор упавших сборок в CI/CD: отлов flaky-тестов, поиск мест ошибок по простыням логов, написание банальных заплаток и ручное создание Pull Request.
+In modern engineering teams, up to **35% of senior developer time** is lost to routine CI/CD failures: triaging flaky tests, deciphering noisy stack traces, applying trivial patches, and waiting for pipelines to re-run.
 
-**AutoHeal-CI** — это автономная мультиагентная система, работающая прямо внутри GitHub Actions Runner на шаге `if: failure()`. 
+**AutoHeal-CI** is an autonomous multi-agent self-healing system designed to run directly inside your GitHub Actions runner on `if: failure()`.
 
-Она локализует причину сбоя с помощью синтаксического анализа AST-графов Tree-sitter, воспроизводит ошибку в изолированном `git worktree`, проводит внутренние состязательные дебаты («Coder» vs «Red-Team Critic») и отправляет проверенный PR с новым регрессионным тестом **до того, как разработчик успел открыть лог CI**.
-
----
-
-## 🚀 Live Cloud Demo в 1 Клик
-
-Вы можете протестировать работу AutoHeal-CI в реальном облаке GitHub Actions без установки и без API-ключей:
-
-1. Перейдите во вкладку [**Actions**](../../actions/workflows/demo-live.yml) этого репозитория.
-2. Выберите воркфлоу **"AutoHeal-CI Live Cloud Demo"**.
-3. Нажмите **"Run workflow"** и выберите сценарий:
-   * `python-zero-division` — исправление деления на ноль в Python;
-   * `typescript-undefined-dereference` — исправление `TypeError` в TypeScript;
-   * `swe-bench-mini-suite` — запуск полного синтетического бенчмарка.
-4. Откройте отчет сборки и изучите **GitHub Step Summary** с интерактивной Mermaid-диаграммой дебатов и готовым `.patch` файлом в артефактах!
+It isolates the exact root cause using **Tree-sitter AST slicing**, reproduces the bug in an ephemeral **`git worktree` sandbox**, runs an internal adversarial debate (**Lead Coder vs Red-Team Critic**), and submits a verified Pull Request with a regression shield **before your engineers even open the CI logs**.
 
 ---
 
-## ⚡ Ключевые инженерные преимущества
+## 🚀 1-Click Live Cloud Demo
 
-| Характеристика | Обычные AI-ассистенты (Copilot / Chat) | Тяжелые Cloud SaaS (Swe-agent и др.) | 🩺 **AutoHeal-CI** |
+You can test AutoHeal-CI directly in the cloud without cloning the repo or providing API keys:
+
+1. Navigate to the [**Actions**](../../actions/workflows/demo-live.yml) tab of this repository.
+2. Select the **"AutoHeal-CI Live Cloud Demo"** workflow.
+3. Click **"Run workflow"** and choose a scenario:
+   * `python-zero-division` — autonomous ZeroDivisionError repair;
+   * `typescript-undefined-dereference` — TypeScript TypeError / optional chaining repair;
+   * `swe-bench-mini-suite` — full synthetic benchmark evaluation.
+4. Inspect the **GitHub Step Summary** with interactive Mermaid deliberation diagrams and verified diff artifacts!
+
+---
+
+## ⚡ Key Engineering Advantages
+
+| Metric | Traditional AI (Copilot / Chat) | Heavy Cloud SaaS (Swe-agent, etc.) | 🩺 **AutoHeal-CI** |
 | :--- | :--- | :--- | :--- |
-| **Точка интеграции** | IDE (человек ждет и кликает) | Сторонний SaaS (загрузка кода в облако) | **In-Runner Action (`if: failure()`)** |
-| **Безопасность данных** | Код летит на внешние серверы | Сторонний доступ к приватным репозиториям | **Zero Data Leakage (Local-First BYOK)** |
-| **Размер контекста** | Весь файл (2k-10k токенов) | Весь репозиторий (RAG/векторы) | **Tree-sitter AST (<2,000 токенов)** |
-| **Проверка решений** | Без проверки (галлюцинации) | Долгий запуск Docker-контейнеров (минуты) | **Git Worktree Sandbox (1-2 секунды)** |
-| **Защита от Overfitting** | Отсутствует | Одиночный агент (склонен к оверфиттингу) | **Adversarial Red-Team Critic Loop** |
-| **Защита от регрессий** | Нет | Запуск всех тестов вручную | **Автоматический Regression Shield** |
+| **Integration Point** | IDE (Engineer waits and clicks) | 3rd-party SaaS (Sends code to cloud) | **In-Runner Action (`if: failure()`)** |
+| **Data Privacy** | Code sent to external servers | Grants full access to private repos | **Zero Data Leakage (Local-First BYOK)** |
+| **Context Window** | Entire files (2k–10k tokens) | Entire repo (Heavy RAG embeddings) | **Tree-sitter AST (<2,000 tokens)** |
+| **Patch Verification**| Unverified (Hallucination risk) | Heavy Docker spins (minutes) | **Git Worktree Sandbox (1–2 seconds)** |
+| **Overfitting Guard** | None | Single agent (High overfitting rate)| **Adversarial Red-Team Critic Loop** |
+| **Regression Shield** | Manual testing required | Slow manual full-suite runs | **Automated Full-Suite Regression Shield** |
 
 ---
 
-## 🌐 Мультиязычность и тест-раннеры
+## 🌐 Multi-Language & Test Runners
 
-AutoHeal-CI нативно поддерживает две ключевые экосистемы:
+AutoHeal-CI natively supports two primary modern software ecosystems:
 
 ### 🐍 Python (`pytest`)
-* **AST-анализ**: `tree-sitter-python` — извлечение функций, `async def`, декораторов, сигнатур классов.
-* **Классификатор ошибок**: `LOGIC_BUG`, `MISSING_DEPENDENCY`, `SYNTAX_ERROR`, `TIMEOUT`.
-* **Dependency Healer**: автоматическое разрешение `ModuleNotFoundError` и добавление пакетов в `pyproject.toml`.
+* **AST Analysis**: `tree-sitter-python` — extracts functions, `async def`, decorators, and class signatures.
+* **Failure Classifier**: `LOGIC_BUG`, `MISSING_DEPENDENCY`, `SYNTAX_ERROR`, `TIMEOUT`.
+* **Dependency Healer**: Automatically resolves `ModuleNotFoundError` and patches `pyproject.toml`.
 
 ### 🟦 TypeScript / JavaScript (`jest` & `vitest`)
-* **AST-анализ**: `tree-sitter-typescript` — стрелочные функции, методы классов, интерфейсы (`interface`), типы (`type`) и JSX/TSX.
-* **Jest/Vitest парсер**: фильтрация стектрейсов от шума `node_modules/`, разбор assertion diff (`Expected / Received`), локализация упавших тестов.
+* **AST Analysis**: `tree-sitter-typescript` — arrow functions, class methods, interfaces, type aliases, and JSX/TSX.
+* **Jest/Vitest Parser**: Strips `node_modules/` noise, parses assertion diffs (`Expected / Received`), and resolves root-cause call sites.
 
 ---
 
-## 🚀 Быстрый старт в GitHub Actions
+## 🚀 Quickstart in GitHub Actions
 
-### 1. Добавление в Python-репозиторий
-Создайте или обновите `.github/workflows/ci.yml`:
+### 1. Add to a Python Repository
+Add to your `.github/workflows/ci.yml`:
 
 ```yaml
 name: CI Suite
@@ -138,23 +143,25 @@ jobs:
       - name: Run Tests
         run: pytest -v
 
-      # Запускается ТОЛЬКО при падении предыдущих тестов
+      # Triggers ONLY when previous test step fails
       - name: AutoHeal-CI Self-Healing Bot
         if: failure()
         uses: nolekek/AutoHeal-CI@v1
         with:
-          api_key: ${{ secrets.OPENAI_API_KEY }} # или ANTHROPIC_API_KEY / GEMINI_API_KEY
+          api_key: ${{ secrets.OPENAI_API_KEY }} # or ANTHROPIC_API_KEY / GEMINI_API_KEY
           model: 'gpt-4o'
           max_rounds: '3'
           create_pr: 'true'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }} # Optional Slack/Teams alert
 ```
 
-### 2. Добавление в TypeScript / Node.js-репозиторий
+### 2. Add to a TypeScript / Node.js Repository
 
 ```yaml
       - name: Run Tests
         run: npm test
 
+      # Triggers ONLY when tests fail
       - name: AutoHeal-CI Self-Healing Bot
         if: failure()
         uses: nolekek/AutoHeal-CI@v1
@@ -166,7 +173,7 @@ jobs:
 
 ---
 
-## 🏗️ Архитектура системы
+## 🏗️ System Architecture
 
 ```mermaid
 flowchart TD
@@ -205,49 +212,49 @@ flowchart TD
 
 ---
 
-## 📊 Мини-бенчмарк (SWE-Bench Mini)
+## 📊 SWE-Bench Mini Benchmark
 
-AutoHeal-CI протестирован на наборе из 9 воспроизводимых дефектов реального мира (6 Python + 3 TypeScript):
+AutoHeal-CI has been verified against a suite of 9 real-world defect scenarios (6 Python + 3 TypeScript):
 
-| ID | Сценарий | Язык | Категория | Раунды | Статус | Защита от Overfitting |
+| ID | Scenario | Language | Defect Category | Rounds | Result | Overfitting Protection |
 | :--- | :--- | :--- | :--- | :---: | :---: | :---: |
-| `off_by_one` | Поиск подстроки / индексация | Python | Logic | 1 | ✅ PASS | Critic Test Green |
-| `none_deref` | Непроверенный `None` параметр | Python | Runtime | 1 | ✅ PASS | Critic Attack Resisted |
-| `key_error_nested` | Извлечение вложенного JSON-ключа | Python | Robustness | 1 | ✅ PASS | Critic Test Green |
-| `zero_division` | Расчет среднего при пустом списке | Python | Edge Case | 1 | ✅ PASS | Guard Verified |
-| `missing_dependency` | Отсутствующий модуль `yaml` | Python | Environment | 0 | ✅ PASS | Auto-healed `pyproject.toml` |
-| `float_precision` | Сравнение float с `math.isclose` | Python | Math | 1 | ✅ PASS | Critic Test Green |
-| `ts_undefined_deref` | Доступ к необязательному свойству | TypeScript | Runtime | 1 | ✅ PASS | Optional Chaining `?.` |
-| `ts_array_index_oob` | Выход за пределы массива в утилите | TypeScript | Logic | 1 | ✅ PASS | Boundary Guard Verified |
-| `ts_falsy_empty_string` | Пропуск пустой строки в валидаторе | TypeScript | Validation | 1 | ✅ PASS | Critic Test Green |
+| `off_by_one` | Substring search & index bounds | Python | Logic | 1 | ✅ PASS | Critic Test Green |
+| `none_deref` | Unchecked `None` parameter | Python | Runtime | 1 | ✅ PASS | Critic Attack Resisted |
+| `key_error_nested` | Nested JSON payload extraction | Python | Robustness | 1 | ✅ PASS | Critic Test Green |
+| `zero_division` | Empty collection average computation | Python | Edge Case | 1 | ✅ PASS | Guard Verified |
+| `missing_dependency` | Missing `yaml` package | Python | Environment | 0 | ✅ PASS | Auto-healed `pyproject.toml` |
+| `float_precision` | Floating-point delta comparison | Python | Math | 1 | ✅ PASS | Critic Test Green |
+| `ts_undefined_deref` | Access to optional property | TypeScript | Runtime | 1 | ✅ PASS | Optional Chaining `?.` |
+| `ts_array_index_oob` | Array out of bounds in utility | TypeScript | Logic | 1 | ✅ PASS | Boundary Guard Verified |
+| `ts_falsy_empty_string` | Falsy empty string in validator | TypeScript | Validation | 1 | ✅ PASS | Critic Test Green |
 
-**Итог:** **9/9 (100% Pass Rate)** • Среднее время локального исправления: **1.8 секунды** • Расход токенов: **~$0.02 - $0.04** на задачу.
+**Summary:** **9/9 (100% Pass Rate)** • Median repair latency: **1.8 seconds** • Token cost: **~$0.02 - $0.04** per repair.
 
 ---
 
-## 💻 Локальный запуск и CLI
+## 💻 Local CLI Execution
 
 ```bash
-# Установка в режиме разработки
+# Clone and install in development mode
 git clone https://github.com/nolekek/AutoHeal-CI.git
 cd AutoHeal-CI
 pip install -e .[dev]
 
-# Запуск самолечения локально
+# Run local self-healing
 auto-heal --repo-path .
 
-# Запуск по сохраненному файлу с логом CI
+# Run against a saved CI log file
 auto-heal --log-file failure.log --repo-path .
 
-# Режим Dry-Run (без создания PR в GitHub)
+# Dry-Run mode (verifies locally without pushing a PR)
 auto-heal --log-file failure.log --dry-run
 ```
 
 ---
 
-## 🧪 Тестирование и верификация
+## 🧪 Testing and Verification
 
-Полный мастер-сьют тестов покрывает все подсистемы:
+A comprehensive master test runner covers all submodules:
 
 ```bash
 pytest -q
@@ -259,81 +266,68 @@ pytest -q
 ====================== 105 passed in 30.27s ======================
 ```
 
-* `tests/test_ast_slicer.py` — синтаксические срезы Python функций, методов и декораторов.
-* `tests/test_typescript_expansion.py` — синтаксические срезы TypeScript/TSX и парсер Jest логов.
-* `tests/test_pytest_parser.py` — разбор стектрейсов, фильтрация `site-packages`.
-* `tests/test_dependency_healer.py` — авто-патчинг `pyproject.toml`.
-* `tests/test_sandbox_worktree.py` — изоляция и жизненный цикл Git Worktree.
-* `tests/test_graph_deliberation.py` — LangGraph стейт-машина состязательных дебатов.
-* `tests/test_delivery_ux.py` — генерация GitHub Step Summary и экспорт `.patch`.
-* `tests/test_benchmark_harness.py` — верификация SWE-Bench Mini harness.
+* `tests/test_ast_slicer.py` — Python AST extraction, classes, and decorators.
+* `tests/test_ts_slicer.py` — TypeScript/TSX AST extraction and Jest stacktrace parsing.
+* `tests/test_pytest_parser.py` — Pytest log parsing, `site-packages` noise filtering.
+* `tests/test_dependency_healer.py` — Autonomous `pyproject.toml` resolution.
+* `tests/test_sandbox_worktree.py` — Git Worktree lifecycle and isolation.
+* `tests/test_graph_deliberation.py` — LangGraph state machine & adversarial loop.
+* `tests/test_delivery_ux.py` — GitHub Step Summary, Mermaid generation, and fallback `.patch` export.
+* `tests/test_commercial.py` — Enterprise license validation and Slack/Teams webhooks.
+* `tests/test_benchmark_harness.py` — SWE-Bench Mini execution harness.
 
 ---
 
-## 📁 Структура репозитория
+## 📁 Repository Structure
 
 ```text
 AutoHeal-CI/
 ├── .github/
+│   ├── FUNDING.yml                    # Sponsorship configuration (Boosty, Lava)
 │   └── workflows/
-│       ├── demo-live.yml              # 1-Click интерактивное Cloud Demo
-│       ├── self-heal-ci.yml           # Рабочий шаблон In-Runner Action
-│       └── test.yml                   # CI матрица тестов (Py 3.10-3.12, Win/Linux)
-├── action.yml                         # GitHub Action метаданные и брендинг
-├── pyproject.toml                     # Зависимости и конфигурация сборок
-├── README.md                          # Документация и витрина проекта
-├── examples/                          # Готовые примеры для экспериментов
-│   ├── python/                        # Пример с багом деления на ноль
-│   └── typescript/                    # Пример с TypeScript TypeError
+│       ├── demo-live.yml              # 1-Click interactive cloud showcase
+│       ├── self-heal-ci.yml           # Production in-runner action workflow
+│       └── test.yml                   # CI test matrix across Python 3.10-3.12
+├── action.yml                         # GitHub Action Marketplace specification
+├── pyproject.toml                     # Package dependencies and build config
+├── README.md                          # Primary English documentation
+├── README_RU.md                       # Русскоязычная документация
+├── PRICING.md                         # Commercial plans & ROI calculator
+├── COMMERCIAL.md                      # Commercial licensing terms & B2B contracts
+├── docs/index.html                    # Hosted product landing page
 ├── src/
 │   └── autoheal/
-│       ├── cli.py                     # CLI точка входа
-│       ├── config.py                  # Pydantic настройки и переменные окружения
-│       ├── parsers/
-│       │   ├── ast_slicer.py          # Tree-sitter Python AST анализатор
-│       │   ├── ts_slicer.py           # Tree-sitter TypeScript/JS анализатор
-│       │   ├── pytest_log_parser.py   # Стектрейс парсер pytest
-│       │   ├── jest_log_parser.py     # Стектрейс парсер Jest / Vitest
-│       │   └── dependency_healer.py   # Автономный резолвер pyproject.toml
-│       ├── sandbox/
-│       │   └── git_worktree.py        # Изолированный Sandbox Harness
-│       ├── agents/
-│       │   ├── state.py               # AutoHealState схема для LangGraph
-│       │   ├── schemas.py             # Pydantic схемы Coder и Critic
-│       │   ├── llm_client.py          # Unified BYOK адаптер + Token/Cost tracker
-│       │   ├── coder_agent.py         # Lead Coder агент
-│       │   ├── critic_agent.py        # Red-Team Critic агент
-│       │   └── graph.py               # Состязательный LangGraph StateGraph
-│       ├── delivery/
-│       │   ├── github_pr.py           # Создание веток, коммитов и Pull Requests
-│       │   ├── step_summary.py        # Интерактивный GitHub Actions Step Summary
-│       │   └── patch_artifact.py      # Экспорт fallback патчей для read-only fork
-│       └── benchmarks/
-│           ├── models.py              # Дата-модели сценариев
-│           ├── scenarios.py           # 6 дефектов реального мира (Python)
-│           ├── ts_scenarios.py        # 3 дефекта реального мира (TypeScript)
-│           └── runner.py              # Автономный Runner бенчмарка
-└── tests/                             # 105 юнит-, интеграционных и сквозных тестов
+│       ├── cli.py                     # CLI entrypoint
+│       ├── config.py                  # Pydantic configuration & env parsing
+│       ├── licensing.py               # Enterprise tier validation & badges
+│       ├── parsers/                   # AST slicers & log parsers
+│       ├── sandbox/                   # Git worktree sandbox harness
+│       ├── agents/                    # LangGraph multi-agent orchestration
+│       ├── delivery/                  # PR, Step Summary & Webhook notifiers
+│       └── benchmarks/                # SWE-Bench Mini test scenarios
+└── tests/                             # 105 unit, integration, and e2e tests
 ```
 
 ---
 
-## 💎 Тарифы и Коммерческая поддержка (Pricing & Plans)
+## 💎 Commercial Edition & Plans
 
-AutoHeal-CI доступен в трех вариантах использования:
+AutoHeal-CI is available under three plans:
 
-| План | Стоимость | Описание и возможности |
+| Plan | Price | Description |
 | :--- | :--- | :--- |
-| **🆓 Community** | **\$0 (Free Forever)** | Open-Source ядро, BYOK (свои ключи OpenAI/Claude/Gemini), неограниченные запуски, AST-слайсинг и песочница. |
-| **⚡ Pro** | **\$39 / мес** | Готовый высокоскоростной LLM-прокси без ввода ключей, мгновенные алерты в **Slack / MS Teams**, приоритетная поддержка. |
-| **🏢 Enterprise** | **\$499 / мес** | Развертывание в изолированном контуре (On-Prem / VPC), поддержка локальных LLM (Ollama, vLLM), адаптеры для GitLab CI / Bitbucket, SLA 99.9%. |
+| **🆓 Community** | **\$0 (Free Forever)** | Open-source core, BYOK (OpenAI/Claude/Gemini keys), unlimited repairs, AST slicing & worktree sandboxing. |
+| **⚡ Pro** | **\$39 / month** | Zero-config high-speed hosted proxy (no API keys needed), instant **Slack & Teams** alerts, priority queue. |
+| **🏢 Enterprise** | **\$499 / month** | Air-gapped on-premise VPC deployment, local LLMs (Ollama, vLLM), GitLab CI & Bitbucket adapters, 99.9% SLA. |
 
-👉 Полное сравнение тарифов и калькулятор окупаемости: [**PRICING.md**](PRICING.md)  
-👉 Условия коммерческого лицензирования и SLA: [**COMMERCIAL.md**](COMMERCIAL.md)  
-👉 Интерактивный лендинг с ROI-калькулятором: [**marketing/index.html**](marketing/index.html)
+👉 Full plan comparison & ROI calculator: [**PRICING.md**](PRICING.md)  
+👉 Commercial licensing & B2B contracts: [**COMMERCIAL.md**](COMMERCIAL.md)  
+👉 Interactive landing page with live ROI calculator: [**nolekek.github.io/AutoHeal-CI**](https://nolekek.github.io/AutoHeal-CI/)
 
 ---
 
-## 📄 Лицензия
+## 📄 License
 
-Распространяется по модели **Dual-Licensing** (Apache-2.0 для открытых проектов / Commercial License для Enterprise). Подробнее в [COMMERCIAL.md](COMMERCIAL.md).
+Distributed under a **Dual-Licensing** model:
+* **Apache-2.0** for personal, open-source, and evaluation use.
+* **Commercial Enterprise License** for proprietary on-premise deployments and SLA coverage (see [COMMERCIAL.md](COMMERCIAL.md)).

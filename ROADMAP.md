@@ -1,6 +1,6 @@
 # 🗺️ AutoHeal-CI — Engineering Roadmap
 
-> **Target**: Transforming the MVP into a production-grade, enterprise-ready CI/CD self-healing platform.
+> **Target**: Transforming the MVP into a production-grade, enterprise-ready multi-language CI/CD self-healing platform.
 
 ---
 
@@ -12,6 +12,8 @@ flowchart LR
     M1 --> M2["Milestone 2: Failure Classifier & Structured Outputs\n(Completed ✅)"]
     M2 --> M3["Milestone 3: Enterprise GitHub UX & Fallbacks\n(Completed ✅)"]
     M3 --> M4["Milestone 4: SWE-Bench Suite & Benchmarks\n(Completed ✅)"]
+    M4 --> M5["Milestone 5: Multi-Language (TS/JS & Jest/Vitest)\n(Completed ✅)"]
+    M5 --> M6["Milestone 6: 1-Click Cloud Live Demo & Showcase\n(Completed ✅)"]
 ```
 
 ---
@@ -53,5 +55,23 @@ flowchart LR
   - 6 reproducible real-world bug scenarios (`off_by_one`, `none_dereference`, `key_error_nested`, `zero_division_guard`, `type_coercion_mismatch`, `missing_boundary_check`).
 - [x] **4.2. Automated Benchmark Runner & Reporter**:
   - `BenchmarkRunner` with isolated ephemeral sandboxes, execution timing, and formatted markdown suite reports.
-- [x] **4.3. 100% Test Coverage**:
-  - 69 tests across the entire repository passing with 0 failures.
+
+---
+
+## 🎯 Milestone 5: Multi-Language Expansion (TypeScript / JavaScript & Jest/Vitest)
+- [x] **5.1. Tree-sitter TypeScript/JS AST Slicer**:
+  - Slicing functions, arrow functions, class methods, interfaces, types, decorators, and JSX/TSX components.
+- [x] **5.2. Jest & Vitest Stacktrace Parser**:
+  - Noise suppression (`node_modules`), assertion diffs (`Expected / Received`), multi-frame caller resolution.
+- [x] **5.3. TypeScript Benchmark Scenarios**:
+  - 3 real-world TS defect scenarios (`ts_undefined_deref`, `ts_array_index_oob`, `ts_falsy_empty_string`).
+
+---
+
+## 🎯 Milestone 6: 1-Click Cloud Live Demo & Interactive Showcase
+- [x] **6.1. GitHub Actions Live Demo Workflow (`demo-live.yml`)**:
+  - One-click `workflow_dispatch` demonstration directly in GitHub Actions with choice of scenario.
+- [x] **6.2. Standalone Examples Directory (`examples/`)**:
+  - Self-contained Python and TypeScript projects with reproducible bugs for instant developer experimentation.
+- [x] **6.3. Master Verification**:
+  - 97 tests passing with 0 warnings and 100% pass rate.

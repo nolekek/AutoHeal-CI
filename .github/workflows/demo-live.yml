@@ -1,0 +1,97 @@
+name: 'AutoHeal-CI Live Cloud Demo'
+
+on:
+  workflow_dispatch:
+    inputs:
+      scenario:
+        description: 'Target Demonstration Scenario'
+        required: true
+        type: choice
+        options:
+          - 'python-zero-division'
+          - 'typescript-undefined-dereference'
+          - 'swe-bench-mini-suite'
+        default: 'python-zero-division'
+      use_mock_llm:
+        description: 'Use deterministic mock LLM (set false to use secrets.OPENAI_API_KEY)'
+        required: true
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  run-live-demo:
+    name: '🩺 AutoHeal-CI Live Showcase'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install AutoHeal-CI Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .[dev]
+
+      # Scenario 1: Python Zero Division Bug Healing
+      - name: 'Scenario: Python ZeroDivisionError Self-Healing'
+        if: ${{ inputs.scenario == 'python-zero-division' }}
+        run: |
+          echo "### 🔍 Running intentional failing test..."
+          pytest examples/python/test_calculator.py -v > pytest_failure.log || true
+          cat pytest_failure.log
+
+          echo "### 🩺 Launching AutoHeal-CI on failure log..."
+          export GITHUB_STEP_SUMMARY="$GITHUB_STEP_SUMMARY"
+          if [ "${{ inputs.use_mock_llm }}" = "true" ]; then
+            python -m autoheal.benchmarks.runner
+          else
+            auto-heal --log-file pytest_failure.log --repo-path .
+          fi
+
+      # Scenario 2: TypeScript Undefined Dereference Healing
+      - name: 'Scenario: TypeScript TypeError Self-Healing'
+        if: ${{ inputs.scenario == 'typescript-undefined-dereference' }}
+        run: |
+          echo "### 📦 Inspecting TypeScript Example..."
+          cat examples/typescript/auth_service.ts
+          cat examples/typescript/auth_service.test.ts
+
+          echo "### 🔬 Verifying Tree-sitter TypeScript Slicing..."
+          python -c "from autoheal.parsers.ts_slicer import TypeScriptASTSlicer; slicer = TypeScriptASTSlicer(); res = slicer.slice_at_line('examples/typescript/auth_service.ts', 13); print(f'Extracted TS Symbol: {res.symbol_name} ({len(res.code)} chars)')"
+
+          echo "### 🩺 Executing TypeScript Deliberation..."
+          python -m pytest tests/test_typescript_expansion.py -v
+
+      # Scenario 3: Full SWE-Bench Mini Suite
+      - name: 'Scenario: SWE-Bench Mini Multi-Agent Benchmark'
+        if: ${{ inputs.scenario == 'swe-bench-mini-suite' }}
+        run: |
+          echo "### 🚀 Executing Full SWE-Bench Mini Suite (6 Python + 3 TypeScript Scenarios)..."
+          python -m autoheal.benchmarks.runner
+
+      - name: Upload Healed Patch Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autoheal-demo-patch
+          path: |
+            .autoheal/*.patch
+            *.patch
+          if-no-files-found: ignore

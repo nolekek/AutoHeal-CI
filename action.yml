@@ -1,0 +1,59 @@
+name: 'AutoHeal-CI'
+description: 'Autonomous Multi-Agent CI/CD Self-Healing Bot with AST-Aware Slicing, Isolated Sandbox Verification & Regression Shielding.'
+author: 'AutoHeal-CI'
+branding:
+  icon: 'cpu'
+  color: 'green'
+
+inputs:
+  api_key:
+    description: 'LLM API key (OpenAI, Anthropic, or Gemini)'
+    required: true
+  model:
+    description: 'Model identifier (e.g. gpt-4o, claude-3-5-sonnet-20241022)'
+    required: false
+    default: 'gpt-4o'
+  provider:
+    description: 'LLM provider (openai, anthropic, or gemini)'
+    required: false
+    default: 'openai'
+  github_token:
+    description: 'GitHub token for branch and Pull Request creation'
+    required: false
+    default: ${{ github.token }}
+  test_command:
+    description: 'Test runner command to reproduce and verify (default: pytest)'
+    required: false
+    default: 'pytest'
+  max_rounds:
+    description: 'Maximum deliberation rounds between Coder and Critic'
+    required: false
+    default: '3'
+  create_pr:
+    description: 'Whether to push a branch and open a PR upon successful fix'
+    required: false
+    default: 'true'
+
+outputs:
+  fixed:
+    description: 'True if a verified fix was generated and passed all regression tests'
+  pr_url:
+    description: 'URL of the created Pull Request if applicable'
+  patch_diff:
+    description: 'The unified diff of the verified patch'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run AutoHeal-CI Engine
+      shell: bash
+      env:
+        AUTOHEAL_API_KEY: ${{ inputs.api_key }}
+        AUTOHEAL_MODEL: ${{ inputs.model }}
+        AUTOHEAL_PROVIDER: ${{ inputs.provider }}
+        AUTOHEAL_GITHUB_TOKEN: ${{ inputs.github_token }}
+        AUTOHEAL_TEST_CMD: ${{ inputs.test_command }}
+        AUTOHEAL_MAX_ROUNDS: ${{ inputs.max_rounds }}
+        AUTOHEAL_CREATE_PR: ${{ inputs.create_pr }}
+      run: |
+        python -m autoheal.cli

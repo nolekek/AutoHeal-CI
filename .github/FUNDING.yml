@@ -1,4 +1,7 @@
 # GitHub Sponsors & Open Source Funding Configuration
 github: [nolekek]
-polar: nolekek
-custom: ["https://polar.sh/nolekek", "https://ko-fi.com/nolekek"]
+custom: [
+  "https://boosty.to/nolekek",
+  "https://lava.top/nolekek",
+  "https://t.me/nolekek"
+]

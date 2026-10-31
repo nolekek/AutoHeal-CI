@@ -38,17 +38,22 @@
 ## 🚀 How to Upgrade
 
 ### ⚡ Upgrading to Pro (\$39/mo)
-1. Subscribe via [Polar.sh](https://polar.sh/nolekek/subscriptions) or our Stripe Portal.
-2. Receive your `AUTOHEAL_LICENSE_KEY`.
-3. Add the secret to your GitHub Repository Settings (`Settings -> Secrets and variables -> Actions`):
-   ```yaml
-   - name: AutoHeal-CI Pro
-     if: failure()
-     uses: nolekek/AutoHeal-CI@v1
-     with:
-       license_key: ${{ secrets.AUTOHEAL_LICENSE_KEY }}
-       webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }} # Optional Slack/Discord alert
-   ```
+
+We support multiple flexible checkout methods for international and local teams:
+
+1. **💳 International Cards (Visa / Mastercard)**: Via our [Lava.top](https://lava.top) / [Boosty](https://boosty.to) storefront.
+2. **🪙 Cryptocurrency (USDT TRC20 / BEP20 / TON / BTC)**: Instant automated key generation with zero payment processor friction.
+3. **🏢 Corporate Invoicing (B2B Wire / Безналичный расчет)**: Available for companies and startups (ООО / ИП / International wire) with official service contracts, invoices, and accounting closing documents.
+
+After payment, you will receive your `AUTOHEAL_LICENSE_KEY`. Add the secret to your GitHub Repository Settings (`Settings -> Secrets and variables -> Actions`):
+```yaml
+- name: AutoHeal-CI Pro
+  if: failure()
+  uses: nolekek/AutoHeal-CI@v1
+  with:
+    license_key: ${{ secrets.AUTOHEAL_LICENSE_KEY }}
+    webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }} # Optional Slack/Discord alert
+```
 
 ### 🏢 Inquiring about Enterprise (\$499/mo)
 For private on-premise deployments (GitLab CI, self-hosted LLMs, air-gapped VPCs, or custom SLAs):

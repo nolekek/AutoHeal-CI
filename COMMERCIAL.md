@@ -24,10 +24,15 @@ We offer high-touch engineering integration for organizations looking to moderni
 
 | Package | Scope | Investment |
 | :--- | :--- | :--- |
-| **Quickstart Pilot (2 Weeks)** | Complete setup across 3 primary repositories, custom regression sandbox configuration, team training, Slack webhook integration. | **\$2,900** |
-| **Enterprise CI/CD Hardening** | Full-scale deployment across GitLab / GitHub Enterprise, local LLM vLLM cluster setup, custom AST slicing rules, and engineer onboarding. | **\$7,500** |
-| **Quarterly Retainer** | Ongoing pipeline optimization, AST rule maintenance, new runner support, monthly flaky-test mitigation audit. | **\$1,200 / month** |
+| **Quickstart Pilot (2 Weeks)** | Complete setup across 3 primary repositories, custom regression sandbox configuration, team training, Slack webhook integration. | **\$2,900 / 280 000 ₽** |
+| **Enterprise CI/CD Hardening** | Full-scale deployment across GitLab / GitHub Enterprise, local LLM vLLM cluster setup, custom AST slicing rules, and engineer onboarding. | **\$7,500 / 720 000 ₽** |
+| **Quarterly Retainer** | Ongoing pipeline optimization, AST rule maintenance, new runner support, monthly flaky-test mitigation audit. | **\$1,200 / 115 000 ₽/мес** |
+
+### 💳 Supported Payment Methods
+- **B2B Wire / Безналичный расчет**: Договор, счет на оплату, закрывающие акты, ЭДО (Диадок / СБИС) для юрлиц и ИП в РФ и СНГ.
+- **Corporate Wire Transfer (SWIFT / SEPA)**: For international legal entities.
+- **Crypto Settlement (USDT / USDC / TON)**: Direct corporate wallet transfer with digital receipts.
 
 For licensing inquiries or custom contracts:  
-📧 **sales@autoheal-ci.dev**  
+📧 **sales@autoheal-ci.dev** / Telegram: **@nolekek**  
 🌐 **https://autoheal-ci.dev**

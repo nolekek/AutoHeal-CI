@@ -10,7 +10,7 @@
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-1--Click%20Workflow-purple.svg)](#-live-cloud-demo-в-1-клик)
 [![Platform](https://img.shields.io/badge/Platform-GitHub%20Actions%20Runner-black.svg)](#-быстрый-старт-в-github-actions)
 [![Pricing](https://img.shields.io/badge/Plans-Free%20%7C%20Pro%20%7C%20Enterprise-success.svg)](PRICING.md)
-[![Sponsor](https://img.shields.io/badge/Sponsor-Polar.sh%20%7C%20GitHub-ff69b4.svg)](.github/FUNDING.yml)
+[![Sponsor](https://img.shields.io/badge/Sponsor-GitHub%20%7C%20Boosty-ff69b4.svg)](.github/FUNDING.yml)
 [![License](https://img.shields.io/badge/License-Apache--2.0%20%7C%20Commercial-blueviolet.svg)](COMMERCIAL.md)
 
 ---

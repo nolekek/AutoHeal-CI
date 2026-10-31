@@ -2,7 +2,9 @@
 
 > **Autonomous Multi-Agent CI/CD Self-Healing Bot with AST-Aware Slicing, Isolated Sandbox Verification & Regression Shielding.**
 
-[![Test Suite](https://img.shields.io/badge/Tests-69%20Passed%20(100%25)-brightgreen.svg)](#тестирование-и-верификация)
+[![Test Suite](https://img.shields.io/badge/Tests-97%20Passed%20(100%25)-brightgreen.svg)](#тестирование-и-верификация)
+[![Supported Languages](https://img.shields.io/badge/Languages-Python%20%7C%20TypeScript%20%7C%20JavaScript-blue.svg)](#-поддерживаемые-языки-и-тест-раннеры)
+[![Test Runners](https://img.shields.io/badge/Runners-pytest%20%7C%20Jest%20%7C%20Vitest-orange.svg)](#-быстрый-старт-в-github-actions)
 [![Benchmark Suite](https://img.shields.io/badge/SWE--Bench%20Mini-6%2F6%20(100%25)-brightgreen.svg)](#-мини-бенчмарк-swe-bench-mini)
 [![Target Accuracy](https://img.shields.io/badge/Patch%20Verification-100%25%20Reproducible-brightgreen.svg)](#-архитектура-системы)
 [![AST Engine](https://img.shields.io/badge/AST%20Parser-Tree--sitter-blue.svg)](#1-ast--symbolic-call-graph-slicing-tree-sitter)

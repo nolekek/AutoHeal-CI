@@ -1,7 +1,10 @@
 import os
 import shutil
 import tempfile
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:
+    import tomli as tomllib  # type: ignore
 import pytest
 from pydantic import ValidationError
 

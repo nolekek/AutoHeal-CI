@@ -34,3 +34,8 @@ auto-heal = "autoheal.cli:main"
 pythonpath = ["src"]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+filterwarnings = [
+    "ignore:'asyncio.iscoroutinefunction' is deprecated:DeprecationWarning",
+    "ignore::DeprecationWarning:langsmith.*",
+    "ignore::DeprecationWarning:urllib3.*"
+]

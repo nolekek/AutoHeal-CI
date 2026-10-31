@@ -27,16 +27,14 @@ flowchart LR
 ---
 
 ## 🎯 Milestone 2: Failure Classifier & Structured Multi-Agent Deliberation
-- [ ] **2.1. Pydantic Structured Outputs**:
-  - Strict JSON schema responses for Coder and Critic agents (eliminates regex parsing brittleness).
-- [ ] **2.2. Pre-Flight Failure Classifier**:
+- [x] **2.1. Pydantic Structured Outputs**:
+  - Strict JSON schema responses for Coder and Critic agents (`CoderPatchOutput`, `CriticAttackOutput`) with robust fallback to markdown parsing.
+- [x] **2.2. Pre-Flight Failure Classifier & Auto-Healer**:
   - Categorize failures before running LLM:
     * `LOGIC_BUG`: Run Coder vs Critic loop.
-    * `MISSING_DEPENDENCY`: Detect missing packages (`ModuleNotFoundError`) and patch `pyproject.toml` directly.
-    * `ENVIRONMENT_CONFIG`: Report missing environment variables/files.
-    * `FLAKY_TEST`: Quarantine or report flaky tests.
-- [ ] **2.3. Token & Cost Guardrails**:
-  - Enforce token budgets per run and automatic provider failover (OpenAI -> Anthropic -> Gemini).
+    * `MISSING_DEPENDENCY`: Detect missing packages (`ModuleNotFoundError`) and patch `pyproject.toml` directly via `DependencyHealer`.
+- [x] **2.3. Token & Cost Guardrails**:
+  - Token tracking, multi-model USD cost calculation, and hard budget limit enforcement (`BudgetExceededError`).
 
 ---
 

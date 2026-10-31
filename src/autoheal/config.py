@@ -21,6 +21,9 @@ class AutoHealConfig(BaseModel):
     max_rounds: int = Field(
         default_factory=lambda: int(os.getenv("AUTOHEAL_MAX_ROUNDS", "3"))
     )
+    max_budget_usd: Optional[float] = Field(
+        default_factory=lambda: float(os.getenv("AUTOHEAL_MAX_BUDGET_USD")) if os.getenv("AUTOHEAL_MAX_BUDGET_USD") else None
+    )
     create_pr: bool = Field(
         default_factory=lambda: os.getenv("AUTOHEAL_CREATE_PR", "true").lower() in ("true", "1", "yes")
     )

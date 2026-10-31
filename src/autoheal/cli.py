@@ -7,6 +7,7 @@ from typing import Optional
 from .config import AutoHealConfig
 from .parsers.pytest_log_parser import PytestLogParser
 from .parsers.ast_slicer import PythonASTSlicer
+from .parsers.dependency_healer import DependencyHealer
 from .agents.llm_client import LLMClient
 from .agents.graph import AutoHealOrchestrator
 from .agents.state import AutoHealState
@@ -81,6 +82,17 @@ def main():
     print(f"🎯 Target failure located: {failure.test_id}")
     print(f"   Origin: {failure.failing_file}:{failure.failing_line} ({failure.exception_type}: {failure.exception_message})")
 
+    # 2.5 Pre-flight check: MISSING_DEPENDENCY auto-healer
+    if failure.failure_mode == "MISSING_DEPENDENCY" and failure.missing_package:
+        print(f"📦 Pre-Flight Classifier: Detected missing dependency '{failure.missing_package}'.")
+        print("🔧 Attempting automatic healing via DependencyHealer...")
+        if DependencyHealer.heal_failure(config.repo_path, failure):
+            print(f"✅ Successfully added '{failure.missing_package}' to pyproject.toml.")
+            write_github_summary(f"### 🩺 AutoHeal-CI Dependency Healed!\nAdded `{failure.missing_package}` to `pyproject.toml`.")
+            return 0
+        else:
+            print("⚠️ DependencyHealer could not patch pyproject.toml. Proceeding to deliberation...")
+
     # 3. Perform Tree-sitter AST slicing
     slicer = PythonASTSlicer()
     full_failing_path = os.path.join(config.repo_path, failure.failing_file)
@@ -129,7 +141,12 @@ def main():
     }
 
     # 5. Execute LangGraph Orchestrator
-    llm = LLMClient(provider=config.provider, model=config.model, api_key=config.api_key)
+    llm = LLMClient(
+        provider=config.provider,
+        model=config.model,
+        api_key=config.api_key,
+        max_budget_usd=config.max_budget_usd
+    )
     orchestrator = AutoHealOrchestrator(llm_client=llm, repo_path=config.repo_path)
 
     print("🤖 Starting LangGraph Adversarial Deliberation (Coder vs Red-Team Critic)...")

@@ -361,6 +361,7 @@ def test_action_yml_structure_and_output_wiring():
 
     assert data.get("name") == "AutoHeal-CI"
     assert data.get("runs", {}).get("using") == "composite"
+    assert data.get("branding") == {"icon": "shield", "color": "green"}
 
     # Verify outputs are properly wired up to the composite step id
     outputs = data.get("outputs", {})

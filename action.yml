@@ -2,7 +2,7 @@ name: 'AutoHeal-CI'
 description: 'Autonomous Multi-Agent CI/CD Self-Healing Bot with AST-Aware Slicing, Isolated Sandbox Verification & Regression Shielding.'
 author: 'AutoHeal-CI'
 branding:
-  icon: 'cpu'
+  icon: 'shield'
   color: 'green'
 
 inputs:

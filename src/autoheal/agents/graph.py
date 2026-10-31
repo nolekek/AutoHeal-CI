@@ -8,6 +8,7 @@ from .coder_agent import CoderAgent
 from .critic_agent import CriticAgent
 from ..sandbox.git_worktree import SandboxHarness
 from ..delivery.github_pr import GitHubPRDelivery
+from ..parsers.diff_generator import UnifiedDiffGenerator
 
 class AutoHealOrchestrator:
     """Orchestrates the LangGraph multi-agent deliberation and verification cycle."""
@@ -85,17 +86,18 @@ class AutoHealOrchestrator:
         """Applies patch to sandbox and verifies if the original failing test passes."""
         self.sandbox.create()
 
-        # Update failing file with revised code in sandbox
+        patch_diff = state.get("patch_diff")
+        # Update failing file with revised code in sandbox and generate unified diff
         if state.get("patched_file_content"):
             rel_path = state["failing_file"]
-            # Apply revised code or replace target function
-            self._apply_replacement_to_sandbox(rel_path, state)
+            patch_diff = self._apply_replacement_to_sandbox(rel_path, state)
 
         # Run specific failing test
         test_selector = state.get("failing_test_name") or state.get("failing_test_file")
         success, output = self.sandbox.run_tests(test_selector=test_selector)
 
         return {
+            "patch_diff": patch_diff,
             "failing_test_resolved": success,
             "test_feedback": output
         }
@@ -165,26 +167,28 @@ class AutoHealOrchestrator:
 
     # --- Helpers ---
 
-    def _apply_replacement_to_sandbox(self, rel_path: str, state: AutoHealState):
+    def _apply_replacement_to_sandbox(self, rel_path: str, state: AutoHealState) -> Optional[str]:
         sandbox_target = os.path.join(self.sandbox.sandbox_path, rel_path)
         if not os.path.exists(sandbox_target):
-            return
+            return None
 
         with open(sandbox_target, "r", encoding="utf-8") as f:
             original = f.read()
 
-        # Surgical AST replacement: replace the original function slice with the revised code
         orig_slice = state.get("ast_symbol_slice", "").strip()
         revised = state.get("patched_file_content", "").strip()
 
-        if orig_slice and orig_slice in original:
-            updated = original.replace(orig_slice, revised, 1)
-        else:
-            # Fallback if whitespace differs: replace by lines
-            lines = original.splitlines(keepends=True)
-            start = max(0, state["failing_line"] - 1)
-            # Find boundaries or overwrite if single function
-            updated = revised if len(lines) <= 20 else original
+        updated = UnifiedDiffGenerator.replace_symbol_in_file(
+            full_file_content=original,
+            original_symbol_slice=orig_slice,
+            revised_symbol_slice=revised
+        )
 
         with open(sandbox_target, "w", encoding="utf-8") as f:
             f.write(updated)
+
+        return UnifiedDiffGenerator.create_unified_diff(
+            original_content=original,
+            modified_content=updated,
+            file_path=rel_path
+        )

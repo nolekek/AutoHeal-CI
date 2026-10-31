@@ -11,6 +11,8 @@ from .parsers.dependency_healer import DependencyHealer
 from .agents.llm_client import LLMClient
 from .agents.graph import AutoHealOrchestrator
 from .agents.state import AutoHealState
+from .delivery.step_summary import StepSummaryGenerator
+from .delivery.patch_artifact import PatchArtifactExporter
 
 def print_banner():
     banner = r"""
@@ -38,6 +40,23 @@ def run_local_pytest(repo_path: str, test_cmd: str) -> tuple[int, str]:
         return proc.returncode, output
     except Exception as e:
         return 1, f"Failed to execute test command: {str(e)}"
+
+def set_github_output(name: str, value: str):
+    """Sets a step output parameter in GitHub Actions via $GITHUB_OUTPUT."""
+    output_path = os.getenv("GITHUB_OUTPUT")
+    if not output_path:
+        return
+    try:
+        os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+        with open(output_path, "a", encoding="utf-8") as f:
+            if "\n" in value:
+                import uuid
+                delimiter = f"ghadelimiter_{uuid.uuid4().hex}"
+                f.write(f"{name}<<{delimiter}\n{value}\n{delimiter}\n")
+            else:
+                f.write(f"{name}={value}\n")
+    except Exception:
+        pass
 
 def write_github_summary(content: str):
     summary_path = os.getenv("GITHUB_STEP_SUMMARY")
@@ -68,6 +87,10 @@ def main():
 
     if exit_code == 0:
         print("✅ All tests are passing! AutoHeal-CI found 0 issues to fix.")
+        set_github_output("fixed", "true")
+        set_github_output("pr_url", "")
+        set_github_output("patch_diff", "")
+        set_github_output("patch_path", "")
         return 0
 
     print("❌ Test failures detected in CI pipeline. Commencing AST localization...")
@@ -88,7 +111,22 @@ def main():
         print("🔧 Attempting automatic healing via DependencyHealer...")
         if DependencyHealer.heal_failure(config.repo_path, failure):
             print(f"✅ Successfully added '{failure.missing_package}' to pyproject.toml.")
-            write_github_summary(f"### 🩺 AutoHeal-CI Dependency Healed!\nAdded `{failure.missing_package}` to `pyproject.toml`.")
+            healed_state = {
+                "status": "dependency_healed",
+                "failing_file": failure.failing_file,
+                "failing_line": failure.failing_line,
+                "failing_symbol_name": failure.missing_package,
+                "exception_type": failure.exception_type,
+                "exception_message": failure.exception_message,
+                "missing_package": failure.missing_package,
+                "round_count": 0,
+                "max_rounds": config.max_rounds,
+            }
+            StepSummaryGenerator(state=healed_state, model=config.model).write_to_github_summary()
+            set_github_output("fixed", "true")
+            set_github_output("pr_url", "")
+            set_github_output("patch_diff", "")
+            set_github_output("patch_path", "")
             return 0
         else:
             print("⚠️ DependencyHealer could not patch pyproject.toml. Proceeding to deliberation...")
@@ -153,14 +191,48 @@ def main():
     final_state = orchestrator.app.invoke(initial_state)
 
     print(f"\n🏁 Deliberation completed with status: {final_state.get('status')}")
+    usage = llm.get_usage()
+    patch_path = final_state.get("patch_path")
+
     if final_state.get("status") == "verified":
         print("🎉 SUCCESS! Patch verified by Red-Team Critic and passed 100% regression suite.")
         if final_state.get("pr_url"):
             print(f"🔗 Pull Request Created: {final_state['pr_url']}")
-            write_github_summary(f"### 🩺 AutoHeal-CI Fix Verified!\nPull Request: {final_state['pr_url']}")
+        else:
+            if not patch_path and final_state.get("patch_diff"):
+                exporter = PatchArtifactExporter(repo_path=config.repo_path)
+                patch_path = exporter.export_from_state(final_state)
+            if patch_path:
+                print(f"📦 Fallback patch artifact generated at: {patch_path}")
+                print(PatchArtifactExporter(config.repo_path).get_apply_instructions(patch_path))
+
+        summary_gen = StepSummaryGenerator(
+            state=final_state,
+            usage=usage,
+            patch_path=patch_path,
+            model=config.model
+        )
+        summary_gen.write_to_github_summary()
+
+        set_github_output("fixed", "true")
+        set_github_output("pr_url", final_state.get("pr_url") or "")
+        set_github_output("patch_diff", final_state.get("patch_diff") or "")
+        set_github_output("patch_path", patch_path or "")
         return 0
     else:
         print("❌ Could not reach a verified patch within maximum deliberation rounds.")
+        summary_gen = StepSummaryGenerator(
+            state=final_state,
+            usage=usage,
+            patch_path=patch_path,
+            model=config.model
+        )
+        summary_gen.write_to_github_summary()
+
+        set_github_output("fixed", "false")
+        set_github_output("pr_url", "")
+        set_github_output("patch_diff", final_state.get("patch_diff") or "")
+        set_github_output("patch_path", patch_path or "")
         return 1
 
 if __name__ == "__main__":

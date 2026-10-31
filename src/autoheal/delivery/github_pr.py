@@ -1,10 +1,13 @@
+from __future__ import annotations
 import os
 import json
 import subprocess
 import urllib.request
 import urllib.error
-from typing import Optional, Dict, Any
-from ..agents.state import AutoHealState
+from typing import Optional, Dict, Any, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from ..agents.state import AutoHealState
 
 class GitHubPRDelivery:
     """Manages branch creation, committing verified patches, and opening Pull Requests."""

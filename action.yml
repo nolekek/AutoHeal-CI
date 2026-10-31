@@ -33,19 +33,30 @@ inputs:
     description: 'Whether to push a branch and open a PR upon successful fix'
     required: false
     default: 'true'
+  max_budget_usd:
+    description: 'Optional hard budget cap in USD for LLM token usage'
+    required: false
+    default: ''
 
 outputs:
   fixed:
     description: 'True if a verified fix was generated and passed all regression tests'
+    value: ${{ steps.autoheal.outputs.fixed }}
   pr_url:
     description: 'URL of the created Pull Request if applicable'
+    value: ${{ steps.autoheal.outputs.pr_url }}
   patch_diff:
     description: 'The unified diff of the verified patch'
+    value: ${{ steps.autoheal.outputs.patch_diff }}
+  patch_path:
+    description: 'Path to exported fallback patch artifact if PR creation was skipped or failed'
+    value: ${{ steps.autoheal.outputs.patch_path }}
 
 runs:
   using: 'composite'
   steps:
     - name: Run AutoHeal-CI Engine
+      id: autoheal
       shell: bash
       env:
         AUTOHEAL_API_KEY: ${{ inputs.api_key }}
@@ -55,5 +66,6 @@ runs:
         AUTOHEAL_TEST_CMD: ${{ inputs.test_command }}
         AUTOHEAL_MAX_ROUNDS: ${{ inputs.max_rounds }}
         AUTOHEAL_CREATE_PR: ${{ inputs.create_pr }}
+        AUTOHEAL_MAX_BUDGET_USD: ${{ inputs.max_budget_usd }}
       run: |
         python -m autoheal.cli

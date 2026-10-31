@@ -8,6 +8,7 @@ from .coder_agent import CoderAgent
 from .critic_agent import CriticAgent
 from ..sandbox.git_worktree import SandboxHarness
 from ..delivery.github_pr import GitHubPRDelivery
+from ..delivery.patch_artifact import PatchArtifactExporter
 from ..parsers.diff_generator import UnifiedDiffGenerator
 
 class AutoHealOrchestrator:
@@ -134,12 +135,18 @@ class AutoHealOrchestrator:
         }
 
     def _node_deliver(self, state: AutoHealState) -> Dict[str, Any]:
-        """Commits verified fix and opens Pull Request."""
+        """Commits verified fix and opens Pull Request, falling back to patch export if needed."""
         pr_url = self.delivery.deliver(state)
+        patch_path = None
+        if not pr_url and state.get("patch_diff"):
+            exporter = PatchArtifactExporter(repo_path=self.repo_path)
+            patch_path = exporter.export_from_state(state)
+
         self.sandbox.cleanup()
         return {
             "status": "verified",
-            "pr_url": pr_url
+            "pr_url": pr_url,
+            "patch_path": patch_path
         }
 
     # --- Routing functions ---

@@ -39,4 +39,5 @@ class AutoHealState(TypedDict):
     # Delivery
     status: str                      # 'in_progress', 'verified', 'failed_max_rounds', 'delivered'
     pr_url: Optional[str]
+    patch_path: Optional[str]
     error_message: Optional[str]

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoHeal-CI — Autonomous Multi-Agent CI/CD Self-Healing Platform</title>
+  <meta name="description" content="AutoHeal-CI autonomously fixes failing CI builds with AST slicing, adversarial red-team deliberation, and regression shielding in 3.4 seconds.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glow-effect {
+      box-shadow: 0 0 50px -10px rgba(16, 185, 129, 0.25);
+    }
+    .grid-bg {
+      background-size: 40px 40px;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-emerald-500 selection:text-white">
+
+  <!-- Navbar -->
+  <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <span class="text-2xl">🩺</span>
+        <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">AutoHeal-CI</span>
+        <span class="text-xs uppercase tracking-widest px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold">v1.0 Production</span>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+        <a href="#features" class="hover:text-emerald-400 transition">Features</a>
+        <a href="#how-it-works" class="hover:text-emerald-400 transition">How it Works</a>
+        <a href="#calculator" class="hover:text-emerald-400 transition">ROI Calculator</a>
+        <a href="#pricing" class="hover:text-emerald-400 transition">Pricing</a>
+        <a href="#faq" class="hover:text-emerald-400 transition">FAQ</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="https://github.com/nolekek/AutoHeal-CI" target="_blank" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-1.5">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="#pricing" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-4 py-2 rounded-lg text-sm transition shadow-lg shadow-emerald-500/20">
+          Start Free
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-20 pb-28 overflow-hidden grid-bg">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-300 mb-8 glow-effect">
+        <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Zero Context Bloat: Tree-sitter AST Slicing (< 2,000 tokens)
+      </div>
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6">
+        Never Wake Up to a <br class="hidden sm:inline">
+        <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">Broken CI Build</span> Again.
+      </h1>
+      <p class="text-lg sm:text-xl text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed font-normal">
+        AutoHeal-CI runs directly on your GitHub Actions runner on <code class="text-emerald-400 font-mono text-sm bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800">if: failure()</code>. It slices failing AST syntax, pits a Coder against an Adversarial Red-Team Critic in an isolated Git sandbox, and opens a verified Pull Request before your engineer even checks Slack.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <a href="https://github.com/nolekek/AutoHeal-CI#1-добавление-в-python-репозиторий" target="_blank" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-base transition flex items-center justify-center gap-2 shadow-xl shadow-emerald-500/20">
+          <span>⚡ Add to GitHub Actions (Free)</span>
+        </a>
+        <a href="#calculator" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 font-bold text-base transition flex items-center justify-center gap-2">
+          <span>📊 Calculate Engineering Savings</span>
+        </a>
+      </div>
+
+      <!-- Live Terminal Showcase -->
+      <div class="max-w-4xl mx-auto rounded-2xl bg-slate-900/90 border border-slate-800 shadow-2xl overflow-hidden text-left font-mono text-xs sm:text-sm">
+        <div class="bg-slate-950 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+            <span class="text-xs text-slate-400 font-sans ml-2">GitHub Actions Runner • autoheal-ci.log</span>
+          </div>
+          <span class="text-xs text-emerald-400 font-semibold font-sans">Execution time: 3.4s</span>
+        </div>
+        <div class="p-6 space-y-2 text-slate-300 leading-relaxed overflow-x-auto">
+          <p class="text-rose-400 font-semibold">❌ CI Failure Detected: tests/test_calculator.py::test_compute_average_empty</p>
+          <p class="text-slate-500">   Origin: src/calculator.py:10 (ZeroDivisionError: division by zero)</p>
+          <p class="text-cyan-400">🔍 [1/4] Parsing failure log via Tree-sitter AST Slicer...</p>
+          <p class="text-slate-400">   ├─ Extracted Function: `compute_average(scores)` (38 tokens, 94.2% context savings)</p>
+          <p class="text-slate-400">   └─ Sibling Signatures: [calculate_discount, validate_range]</p>
+          <p class="text-amber-400">⚔️ [2/4] Adversarial Red-Team Deliberation...</p>
+          <p class="text-slate-400">   ├─ Round 1: Coder proposes `if not scores: return 0.0` (Failing test passes)</p>
+          <p class="text-slate-400">   ├─ Critic Attack: Red-Team generates test with None & generator expressions</p>
+          <p class="text-slate-400">   └─ Round 2: Coder strengthens validation. Red-Team Critic votes: APPROVED ✅</p>
+          <p class="text-emerald-400">🛡️ [3/4] Isolated Git Worktree Sandbox Verification...</p>
+          <p class="text-slate-400">   └─ Regression Shield: 100% Green (97/97 tests pass with patch applied)</p>
+          <p class="text-purple-400 font-bold">🚀 [4/4] Delivery: Created PR #42 (autoheal/fix-compute-average) • LLM Cost: $0.031</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive ROI Calculator -->
+  <section id="calculator" class="py-24 border-t border-slate-800 bg-slate-900/40">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-xs uppercase tracking-widest text-emerald-400 font-bold mb-2">Cost of Inaction</h2>
+        <h3 class="text-3xl sm:text-4xl font-extrabold text-white">How much do broken CI builds cost your team?</h3>
+        <p class="text-slate-400 mt-3 text-base max-w-2xl mx-auto">
+          Context switching destroys developer flow. Calculate how many engineering hours and payroll dollars AutoHeal-CI saves you every month.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-slate-900 p-8 sm:p-12 rounded-3xl border border-slate-800 shadow-xl">
+        <div class="lg:col-span-7 space-y-6">
+          <div>
+            <div class="flex justify-between text-sm font-semibold mb-2">
+              <label for="devCount">Engineers in Team:</label>
+              <span id="devCountVal" class="text-emerald-400 font-bold font-mono">15 devs</span>
+            </div>
+            <input type="range" id="devCount" min="2" max="100" value="15" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+          </div>
+
+          <div>
+            <div class="flex justify-between text-sm font-semibold mb-2">
+              <label for="hourlyRate">Average Dev Hourly Rate ($):</label>
+              <span id="hourlyRateVal" class="text-emerald-400 font-bold font-mono">$75 / hr</span>
+            </div>
+            <input type="range" id="hourlyRate" min="30" max="250" value="75" step="5" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+          </div>
+
+          <div>
+            <div class="flex justify-between text-sm font-semibold mb-2">
+              <label for="ciFailures">CI Failures per Week:</label>
+              <span id="ciFailuresVal" class="text-emerald-400 font-bold font-mono">20 failures</span>
+            </div>
+            <input type="range" id="ciFailures" min="5" max="100" value="20" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+          </div>
+          
+          <div class="text-xs text-slate-500 leading-normal">
+            * Based on industry average: 30 minutes to triage, reproduce, debug, patch, and re-run CI per incident, plus 20 minutes context switching penalty (Gloria Mark research).
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 bg-slate-950 p-6 sm:p-8 rounded-2xl border border-emerald-500/30 text-center relative overflow-hidden">
+          <div class="text-xs uppercase font-bold tracking-wider text-emerald-400 mb-2">Estimated Monthly Savings</div>
+          <div id="monthlySavings" class="text-4xl sm:text-5xl font-extrabold text-white font-mono mb-2">$3,000</div>
+          <div class="text-sm text-slate-400 mb-6">equivalent to <span id="hoursSaved" class="text-emerald-300 font-bold">40 hours</span> of senior engineer time saved every month</div>
+
+          <div class="border-t border-slate-800 pt-4 text-left space-y-2 text-xs text-slate-400">
+            <div class="flex justify-between">
+              <span>Annual Payroll Saved:</span>
+              <span id="annualSavings" class="font-bold text-white font-mono">$36,000</span>
+            </div>
+            <div class="flex justify-between">
+              <span>AutoHeal-CI Pro Cost:</span>
+              <span class="font-bold text-emerald-400 font-mono">$39 / mo</span>
+            </div>
+            <div class="flex justify-between pt-1 font-semibold text-slate-200">
+              <span>Net ROI Multiplier:</span>
+              <span id="roiMultiple" class="font-bold text-emerald-400 font-mono">76x ROI</span>
+            </div>
+          </div>
+
+          <a href="#pricing" class="mt-6 block w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm transition">
+            Claim Your Free Trial
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Table (Good-Better-Best) -->
+  <section id="pricing" class="py-24 max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-xs uppercase tracking-widest text-emerald-400 font-bold mb-2">Transparent Pricing</h2>
+      <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Choose the right plan for your engineering velocity</h3>
+      <p class="text-slate-400 mt-3 text-base">Simple, predictable pricing with zero per-seat friction.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+      <!-- Community -->
+      <div class="rounded-3xl bg-slate-900/60 p-8 border border-slate-800 flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between items-center mb-4">
+            <h4 class="text-xl font-bold text-white">Community</h4>
+            <span class="text-xs uppercase px-2 py-1 rounded bg-slate-800 text-slate-300 font-semibold">Open Source</span>
+          </div>
+          <p class="text-slate-400 text-sm mb-6">Perfect for solo developers, open-source maintainers, and evaluation.</p>
+          <div class="text-4xl font-extrabold text-white font-mono mb-6">$0 <span class="text-sm font-sans font-normal text-slate-400">/ forever</span></div>
+          <ul class="space-y-3 text-sm text-slate-300 mb-8">
+            <li class="flex items-center gap-2">✅ Bring Your Own Key (OpenAI, Claude, Gemini)</li>
+            <li class="flex items-center gap-2">✅ Tree-sitter Python & TypeScript AST Slicer</li>
+            <li class="flex items-center gap-2">✅ Git Worktree Sandbox Verification</li>
+            <li class="flex items-center gap-2">✅ Regression Shield (100% tests green)</li>
+            <li class="flex items-center gap-2">✅ Rich GitHub Step Summary & PRs</li>
+            <li class="flex items-center gap-2 text-slate-500">❌ Hosted LLM Proxy & Fast-Lane</li>
+            <li class="flex items-center gap-2 text-slate-500">❌ Instant Slack / Teams Webhooks</li>
+          </ul>
+        </div>
+        <a href="https://github.com/nolekek/AutoHeal-CI" target="_blank" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-center block transition text-sm">
+          Get Started on GitHub
+        </a>
+      </div>
+
+      <!-- Pro (Target) -->
+      <div class="rounded-3xl bg-slate-900 p-8 border-2 border-emerald-500 flex flex-col justify-between relative shadow-2xl shadow-emerald-500/10">
+        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-emerald-500 text-slate-950 font-extrabold text-xs uppercase tracking-wider px-3.5 py-1 rounded-full shadow">
+          Most Popular
+        </div>
+        <div>
+          <div class="flex justify-between items-center mb-4">
+            <h4 class="text-xl font-bold text-white">Pro</h4>
+            <span class="text-xs uppercase px-2 py-1 rounded bg-emerald-500/20 text-emerald-400 font-semibold">Team Speed</span>
+          </div>
+          <p class="text-slate-400 text-sm mb-6">For fast-moving software teams looking to eliminate CI interruption.</p>
+          <div class="text-4xl font-extrabold text-white font-mono mb-6">$39 <span class="text-sm font-sans font-normal text-slate-400">/ repo / month</span></div>
+          <ul class="space-y-3 text-sm text-slate-200 mb-8">
+            <li class="flex items-center gap-2">⭐ <strong>Everything in Community, plus:</strong></li>
+            <li class="flex items-center gap-2">⚡ <strong>Zero-Config Hosted LLM Proxy</strong> (no API keys needed)</li>
+            <li class="flex items-center gap-2">🔔 <strong>Instant Slack & MS Teams Webhook Alerts</strong></li>
+            <li class="flex items-center gap-2">🚀 Priority Fast-Lane Deliberation Routing</li>
+            <li class="flex items-center gap-2">🛡️ Multi-Language: Python, TS, JS + Go (Beta)</li>
+            <li class="flex items-center gap-2">💬 Priority 24h Developer Support</li>
+            <li class="flex items-center gap-2">🔒 30-Day Unconditional Money-Back Guarantee</li>
+          </ul>
+        </div>
+        <a href="https://t.me/nolekek" target="_blank" class="w-full py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-center block transition text-sm shadow-lg shadow-emerald-500/20">
+          Subscribe to Pro ($39/mo)
+        </a>
+        <div class="text-center text-[11px] text-slate-400 mt-2">
+          Cards (Visa/MC) • Crypto (USDT/TON) • B2B Wire
+        </div>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="rounded-3xl bg-slate-900/60 p-8 border border-slate-800 flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between items-center mb-4">
+            <h4 class="text-xl font-bold text-white">Enterprise</h4>
+            <span class="text-xs uppercase px-2 py-1 rounded bg-purple-500/20 text-purple-400 font-semibold">Compliance</span>
+          </div>
+          <p class="text-slate-400 text-sm mb-6">For scaleups and enterprises with air-gapped or private LLM requirements.</p>
+          <div class="text-4xl font-extrabold text-white font-mono mb-6">$499 <span class="text-sm font-sans font-normal text-slate-400">/ month</span></div>
+          <ul class="space-y-3 text-sm text-slate-300 mb-8">
+            <li class="flex items-center gap-2">⭐ <strong>Everything in Pro, plus:</strong></li>
+            <li class="flex items-center gap-2">🏢 <strong>Air-gapped & On-Prem LLM Support</strong> (Ollama, vLLM)</li>
+            <li class="flex items-center gap-2">🦊 <strong>GitLab CI & Bitbucket Pipelines Adapters</strong></li>
+            <li class="flex items-center gap-2">🔒 Full Commercial Indemnification & IP Shield</li>
+            <li class="flex items-center gap-2">⏱️ 99.9% Uptime & 4-Hour Response SLA</li>
+            <li class="flex items-center gap-2">🤝 Dedicated Slack Channel with Lead Engineers</li>
+          </ul>
+        </div>
+        <a href="mailto:sales@autoheal-ci.dev?subject=AutoHeal-CI%20Enterprise%20Inquiry" class="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-center block transition text-sm">
+          Contact Enterprise Sales
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-20 border-t border-slate-800 bg-slate-900/30">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-xs uppercase tracking-widest text-emerald-400 font-bold mb-2">Got Questions?</h2>
+        <h3 class="text-3xl font-extrabold text-white">Frequently Asked Questions</h3>
+      </div>
+      <div class="space-y-6">
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+          <h4 class="text-base font-bold text-white mb-2">Does our proprietary code leak to external servers?</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            No. AutoHeal-CI runs completely inside your own GitHub Actions Runner. We slice only the exact AST tokens of the failing function via Tree-sitter (averaging under 2,000 tokens), rather than sending entire files. For Enterprise customers, we support 100% on-premises self-hosted LLMs (Ollama, vLLM) so zero bytes ever leave your firewall.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+          <h4 class="text-base font-bold text-white mb-2">How do you prevent the AI from generating regressions or bad patches?</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            AutoHeal-CI uses an Adversarial Red-Team Critic loop and an isolated <code class="text-emerald-400">git worktree</code> sandbox. The fix is only delivered if: (1) the original failing test passes, (2) the Red-Team Critic's adversarial edge-case test passes, and (3) 100% of the repository's existing test suite passes with zero regressions.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+          <h4 class="text-base font-bold text-white mb-2">How long does it take to integrate?</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Under 2 minutes. You simply add 8 lines of YAML to your <code class="text-emerald-400">.github/workflows/ci.yml</code> file under <code class="text-emerald-400">if: failure()</code>. AutoHeal-CI sits idle with zero CPU overhead until a test actually fails.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800">
+          <h4 class="text-base font-bold text-white mb-2">What happens if we're not satisfied with the Pro plan?</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            We offer a 30-day 100% unconditional money-back guarantee. If AutoHeal-CI does not save your team at least 10x its subscription cost in developer time, email us and we will refund every penny.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 py-12 bg-slate-950 text-slate-500 text-xs">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <span class="text-xl">🩺</span>
+        <span class="font-bold text-slate-300">AutoHeal-CI</span>
+        <span>© 2026 AutoHeal-CI Team. Dual-Licensed (Apache-2.0 & Commercial).</span>
+      </div>
+      <div class="flex space-x-6">
+        <a href="https://github.com/nolekek/AutoHeal-CI" class="hover:text-slate-300 transition">GitHub</a>
+        <a href="https://t.me/nolekek" class="hover:text-slate-300 transition">Telegram Support</a>
+        <a href="mailto:sales@autoheal-ci.dev" class="hover:text-slate-300 transition">Enterprise Sales</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const devCount = document.getElementById('devCount');
+    const hourlyRate = document.getElementById('hourlyRate');
+    const ciFailures = document.getElementById('ciFailures');
+
+    const devCountVal = document.getElementById('devCountVal');
+    const hourlyRateVal = document.getElementById('hourlyRateVal');
+    const ciFailuresVal = document.getElementById('ciFailuresVal');
+
+    const monthlySavings = document.getElementById('monthlySavings');
+    const hoursSaved = document.getElementById('hoursSaved');
+    const annualSavings = document.getElementById('annualSavings');
+    const roiMultiple = document.getElementById('roiMultiple');
+
+    function updateCalc() {
+      const devs = parseInt(devCount.value);
+      const rate = parseInt(hourlyRate.value);
+      const failsPerWeek = parseInt(ciFailures.value);
+
+      devCountVal.innerText = `${devs} devs`;
+      hourlyRateVal.innerText = `$${rate} / hr`;
+      ciFailuresVal.innerText = `${failsPerWeek} failures`;
+
+      // 0.5 hr to fix + 0.33 hr context switch = ~0.65 hr per failure
+      const hoursPerMonth = Math.round(failsPerWeek * 4 * 0.65);
+      const dollarsPerMonth = Math.round(hoursPerMonth * rate);
+      const dollarsAnnual = dollarsPerMonth * 12;
+      const roi = Math.round(dollarsPerMonth / 39);
+
+      monthlySavings.innerText = `$${dollarsPerMonth.toLocaleString()}`;
+      hoursSaved.innerText = `${hoursPerMonth} hours`;
+      annualSavings.innerText = `$${dollarsAnnual.toLocaleString()}`;
+      roiMultiple.innerText = `${roi}x ROI`;
+    }
+
+    devCount.addEventListener('input', updateCalc);
+    hourlyRate.addEventListener('input', updateCalc);
+    ciFailures.addEventListener('input', updateCalc);
+
+    updateCalc();
+  </script>
+</body>
+</html>
